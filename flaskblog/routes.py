@@ -40,7 +40,6 @@ def about():
 	return render_template('about.html', title='About')
 
 
-
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     form = LoginForm()
@@ -67,7 +66,6 @@ def register():
         flash(f'Account Created! You may now log in', 'success')
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
-
 
 
 @app.route("/logout")

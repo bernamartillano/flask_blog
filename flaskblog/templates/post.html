@@ -1,16 +1,20 @@
 <!-- -*- mode: jinja2 -*- -->
-{% extends "base.html" %}
-{% block title %}{{ post.title }}{% endblock %}
-{% block body %}
-  <p class="post-details">
-    Published by <span class="post-details-author">{{ post.author }}</span>
-    on <span class="post-details-date">{{ post.date|human_date }}</span>.
-  </p>
-  <p class="post-content">
-    {{ post.body }}
-  </p>
+{% extends "layout.html" %}
+{% block content %}
 
-  <hr />
+<article class="media content-section">
+    <img class="rounded-circle article-img" src="/static/profile_pics/default.jpg">
+    <div class="media-body">
+      <div class="article-metadata">
+        <a class="mr-2" href="#">{{ post.author }}</a>
+        <small class="text-muted">{{ post.date | human_date }}</small>
+      </div>
+      <h2 class="article-title">{{ post.title }}</h2>
+      <p class="article-content">{{ post.body }}</p>
+    </div>
+  </article>
+
+  <hr/>
 
   <div class="comments">
     {% if post.comments %}
@@ -37,10 +41,11 @@
     <form method="POST" id="comment-form" action="/comments/new">
       {{ input('author', label='email') }}
       <label for="content">Comment</label>
-      <textarea rows="40" cols="80" name="content" form="comment-form"></textarea>
-      <input type="hidden" name="post_id" value="{{ post['_id']}}" />
+      <textarea rows="10" cols="60" name="content" form="comment-form"></textarea>
+      <input type="hidden" name="post_id" value="{{ post['_id']}}" /> <br>
       <input type="submit" value="submit comment" />
     </form>
-  </div>
+  </div><br>
   <a href="/">Back to main page</a>.
+
 {% endblock %}
